@@ -1,0 +1,101 @@
+name: XCTest
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    env:
+      SCHEME: "ProgettoSoftwareTesting"
+      DERIVED_DATA_PATH: "DerivedData"
+    runs-on: macos-13
+    steps:
+    - name: Select Xcode version
+      run: sudo xcode-select -s '/Applications/Xcode_15.0.1.app'
+    - name: Checkout project
+      uses: actions/checkout@v1
+    - name: Build
+      run: |
+        set -o pipefail && xcodebuild clean -scheme $SCHEME -destination "generic/platform=iOS Simulator" -derivedDataPath $DERIVED_DATA_PATH build-for-testing CODE_SIGNING_ALLOWED=NO | xcpretty --color --simple
+    - name: Upload products
+      uses: actions/upload-artifact@v1
+      with:
+        name: Products
+        path: DerivedData/Build/Products
+        
+  unit_test:
+    name: Unit Test
+    env:
+      DERIVED_DATA_PATH: "DerivedData"
+      UNIT_TEST_TARGET: "ProgettoSoftwareTestingTests"
+    runs-on: macOS-13
+    needs: build
+    steps:
+    - name: Checkout project
+      uses: actions/checkout@v1
+    - name: Download products
+      uses: actions/download-artifact@v1
+      with:
+        name: Products
+    - name: Run unit tests
+      run: |
+        set -o pipefail && xcodebuild test-without-building -xctestrun $(find . -type f -name "*.xctestrun") -destination "platform=iOS Simulator,name=iPhone 14" -derivedDataPath $DERIVED_DATA_PATH -resultBundlePath UnitTestResults -enableCodeCoverage YES -only-testing:$UNIT_TEST_TARGET | xcpretty --color --simple
+    - name: Upload test logs
+      uses: actions/upload-artifact@v1
+      with:
+        name: UnitTestResults
+        path: UnitTestResults.xcresult
+
+  ui_test:
+    name: UI Test
+    env:
+      DERIVED_DATA_PATH: "DerivedData"
+      UI_TEST_TARGET: "ProgettoSoftwareTestingUITests"
+    runs-on: macOS-13
+    needs: build
+    steps:
+    - name: Checkout project 
+      uses: actions/checkout@v1
+    - name: Download products
+      uses: actions/download-artifact@v1
+      with:
+        name: Products
+    - name: Run UI tests
+      run: |
+        set -o pipefail && xcodebuild test-without-building -xctestrun $(find . -type f -name "*.xctestrun") -destination "platform=iOS Simulator,name=iPhone 14" -derivedDataPath $DERIVED_DATA_PATH -resultBundlePath UITestResults -enableCodeCoverage YES -only-testing:$UI_TEST_TARGET | xcpretty  --color --simple
+    - name: Upload test logs
+      uses: actions/upload-artifact@v1
+      with:
+        name: UITestResults
+        path: UITestResults.xcresult
+
+  results:
+    name: Results Generation
+    runs-on: macOS-13
+    needs: [unit_test, ui_test]
+    steps:
+    - name: Download Unit Tests Logs
+      uses: actions/download-artifact@v1
+      with:
+        name: UnitTestResults
+        path: ./UnitTestResults.xcresult
+    - name: Download UI Tests Logs
+      uses: actions/download-artifact@v1
+      with:
+        name: UITestResults
+        path: ./UITestResults.xcresult
+    - uses: kishikawakatsumi/xcresulttool@v1
+      with:
+        path: |
+          ./UnitTestResults.xcresult
+          ./UITestResults.xcresult
+      if: success() || failure()
+
+
+
+
+
+      
