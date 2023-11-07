@@ -21,12 +21,12 @@ final class TaskViewUITests: XCTestCase {
         // Precondition: Login completed successfully
         
         let emailTextField = app?.textFields["EmailTextField"]
-        emailTextField?.tap()
-        emailTextField?.typeText("test@test.it")
+        emailTextField?.waitUntilExists().tap()
+        waitUntilElementHasFocus(element: emailTextField)?.typeText("test@test.it")
         
         let passwordTextField = app?.secureTextFields["PasswordSecureTextField"]
-        passwordTextField?.tap()
-        passwordTextField?.typeText("Test123!")
+        passwordTextField?.waitUntilExists().tap()
+        waitUntilElementHasFocus(element: passwordTextField)?.typeText("Test123!")
     
         app?.buttons["SignupButton"].tap()
         app?.alerts.element.buttons["AlertCloseButton"].tap()
@@ -39,6 +39,9 @@ final class TaskViewUITests: XCTestCase {
     }
     
     func testTaskLifecycle() throws {
+        
+        // Computing: All task delete
+        app?.navigationBars["Tasks"].buttons["DeleteAllTaskButton"].tap()
         
         // Precondition: There should be no task
         precondition(app?.staticTexts["NoTaskLabel"].exists ?? false)
@@ -93,6 +96,29 @@ final class TaskViewUITests: XCTestCase {
         XCTAssert(title?.exists ?? false)
         XCTAssert(emailTextField?.exists ?? false)
         XCTAssert(passwordTextField?.exists ?? false)
+        
+    }
+    
+    func testDeleteAllTasks() throws {
+        
+        // Input
+        let newTaskName = "UITest Alert"
+        
+        // Computing: Task Creation
+        app?.buttons["CreateTaskButton"].tap()
+        
+        let alertTextField = app?.alerts.element.textFields["Name"]
+        alertTextField?.typeText(newTaskName)
+        app?.alerts.element.buttons["CreateTaskAlertConfirmButton"].tap()
+        
+        let newTask = app?.staticTexts[newTaskName]
+        XCTAssert(newTask?.exists ?? false)
+        
+        // Computing: All task delete
+        app?.navigationBars["Tasks"].buttons["DeleteAllTaskButton"].tap()
+        
+        let emptyState = app?.staticTexts["NoTaskLabel"]
+        XCTAssert(emptyState?.exists ?? false)
         
     }
 

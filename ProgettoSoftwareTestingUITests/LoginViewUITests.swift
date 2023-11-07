@@ -36,12 +36,12 @@ final class LoginViewUITests: XCTestCase {
     func testSignupFail() throws {
         
         let emailTextField = app?.textFields["EmailTextField"]
-        emailTextField?.tap()
-        emailTextField?.typeText("123456789")
+        emailTextField?.waitUntilExists().tap()
+        waitUntilElementHasFocus(element: emailTextField)?.typeText("123456789")
         
         let passwordTextField = app?.secureTextFields["PasswordSecureTextField"]
-        passwordTextField?.tap()
-        passwordTextField?.typeText("123456789")
+        passwordTextField?.waitUntilExists().tap()
+        waitUntilElementHasFocus(element: passwordTextField)?.typeText("123456789")
         
         app?.buttons["SignupButton"].tap()
         
@@ -51,12 +51,12 @@ final class LoginViewUITests: XCTestCase {
     func testSignupSuccess() throws {
         
         let emailTextField = app?.textFields["EmailTextField"]
-        emailTextField?.tap()
-        emailTextField?.typeText("test@test.it")
+        emailTextField?.waitUntilExists().tap()
+        waitUntilElementHasFocus(element: emailTextField)?.typeText("123456789")
         
         let passwordTextField = app?.secureTextFields["PasswordSecureTextField"]
-        passwordTextField?.tap()
-        passwordTextField?.typeText("Test123!")
+        passwordTextField?.waitUntilExists().tap()
+        waitUntilElementHasFocus(element: passwordTextField)?.typeText("123456789")
         
         app?.buttons["SignupButton"].tap()
         
@@ -71,12 +71,12 @@ final class LoginViewUITests: XCTestCase {
     func testLoginFail() throws {
         
         let emailTextField = app?.textFields["EmailTextField"]
-        emailTextField?.tap()
-        emailTextField?.typeText("123456789")
+        emailTextField?.waitUntilExists().tap()
+        waitUntilElementHasFocus(element: emailTextField)?.typeText("123456789")
         
         let passwordTextField = app?.secureTextFields["PasswordSecureTextField"]
-        passwordTextField?.tap()
-        passwordTextField?.typeText("123456789")
+        passwordTextField?.waitUntilExists().tap()
+        waitUntilElementHasFocus(element: passwordTextField)?.typeText("123456789")
         
         app?.buttons["LoginButton"].tap()
         
@@ -87,12 +87,12 @@ final class LoginViewUITests: XCTestCase {
         
         // Registration
         let emailTextField = app?.textFields["EmailTextField"]
-        emailTextField?.tap()
-        emailTextField?.typeText("test@test.it")
+        emailTextField?.waitUntilExists().tap()
+        waitUntilElementHasFocus(element: emailTextField)?.typeText("test@test.it")
         
         let passwordTextField = app?.secureTextFields["PasswordSecureTextField"]
-        passwordTextField?.tap()
-        passwordTextField?.typeText("Test123!")
+        passwordTextField?.waitUntilExists().tap()
+        waitUntilElementHasFocus(element: passwordTextField)?.typeText("Test123!")
         
         app?.buttons["SignupButton"].tap()
         app?.alerts.element.buttons["AlertCloseButton"].tap()
@@ -110,8 +110,8 @@ final class LoginViewUITests: XCTestCase {
         let password = "Test123!"
         
         let passwordTextField = app?.secureTextFields["PasswordSecureTextField"]
-        passwordTextField?.tap()
-        passwordTextField?.typeText(password)
+        passwordTextField?.waitUntilExists().tap()
+        waitUntilElementHasFocus(element: passwordTextField)?.typeText(password)
         
         app?.buttons["ShowPasswordButton"].tap()
         

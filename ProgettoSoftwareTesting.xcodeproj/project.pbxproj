@@ -37,6 +37,7 @@
 		A05197762AF79CE80040E18C /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05197752AF79CE80040E18C /* TaskViewModelTests.swift */; };
 		A0E20EF52AFAA3870010A66D /* LoginViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E20EF42AFAA3870010A66D /* LoginViewUITests.swift */; };
 		A0E20EF72AFAACE00010A66D /* TaskViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E20EF62AFAACE00010A66D /* TaskViewUITests.swift */; };
+		A0E20EFF2AFAE1100010A66D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E20EFE2AFAE1100010A66D /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		A05197752AF79CE80040E18C /* TaskViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModelTests.swift; sourceTree = "<group>"; };
 		A0E20EF42AFAA3870010A66D /* LoginViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewUITests.swift; sourceTree = "<group>"; };
 		A0E20EF62AFAACE00010A66D /* TaskViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewUITests.swift; sourceTree = "<group>"; };
+		A0E20EFE2AFAE1100010A66D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 			children = (
 				A0E20EF42AFAA3870010A66D /* LoginViewUITests.swift */,
 				A0E20EF62AFAACE00010A66D /* TaskViewUITests.swift */,
+				A0E20EFE2AFAE1100010A66D /* Utils.swift */,
 			);
 			path = ProgettoSoftwareTestingUITests;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				A051973F2AF2ABAE0040E18C /* TaskViewModel.swift in Sources */,
 				A05197432AF2AC000040E18C /* TaskModel.swift in Sources */,
 				A0E20EF52AFAA3870010A66D /* LoginViewUITests.swift in Sources */,
+				A0E20EFF2AFAE1100010A66D /* Utils.swift in Sources */,
 				A05197482AF2EECB0040E18C /* StringValidators.swift in Sources */,
 				A051974C2AF2EED30040E18C /* LoginView.swift in Sources */,
 				A051974A2AF2EECF0040E18C /* LoginViewModel.swift in Sources */,

@@ -154,6 +154,27 @@ final class TaskViewModelTests: XCTestCase {
         XCTAssertEqual(expectedTaskName, viewModel?.tasks.first?.name)
     }
     
+    func testDeleteAllTask() throws {
+        // Precondition
+        precondition(viewModel != nil)
+        precondition(userDefaults != nil)
+        
+        // Precondition: Some tasks exist
+        let newTaskNames = ["Test1", "Test2", "Test3", "Test4", "Test5"]
+        for name in newTaskNames {
+            viewModel?.newTaskName = name
+            viewModel?.createNewTask()
+        }
+        
+        // Computing
+        viewModel?.deleteAllTask()
+        
+        let expectedCount = 0
+        
+        //  Assertion
+        XCTAssertEqual(expectedCount, viewModel?.tasks.count)
+    }
+    
     func testDeleteTaskInvalidIndex() throws {
         // Precondition
         precondition(viewModel != nil)

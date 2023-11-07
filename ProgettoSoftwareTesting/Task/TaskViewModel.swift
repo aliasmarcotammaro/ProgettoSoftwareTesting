@@ -59,6 +59,11 @@ class TaskViewModel: ObservableObject {
         return true
     }
     
+    func deleteAllTask() {
+        self.tasks = []
+        updatePersistance(tasks: self.tasks)
+    }
+    
     // Persistance Methods
     
     func updatePersistance(tasks: [Task]) {

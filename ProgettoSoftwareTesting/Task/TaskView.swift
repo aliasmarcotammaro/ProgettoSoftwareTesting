@@ -60,6 +60,15 @@ struct TaskView: View {
             
         }
         .navigationTitle("Tasks")
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    vm.deleteAllTask()
+                } label: {
+                    Image(systemName: "trash")
+                }.accessibilityLabel("DeleteAllTaskButton")
+            }
+        })
         .alert("New Task", isPresented: $vm.newTaskAlertPresented, actions: {
             
             TextField("Name", text: $vm.newTaskName)
