@@ -81,4 +81,9 @@ class TaskViewModel: ObservableObject {
         self.newTaskAlertPresented = true
     }
     
+    func accessibilityLabelFor(task: Task) -> String {
+        guard task.completed else { return task.name }
+        return "striked: " + task.name
+    }
+    
 }

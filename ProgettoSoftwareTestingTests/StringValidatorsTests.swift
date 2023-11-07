@@ -36,11 +36,16 @@ final class StringValidatorsTests: XCTestCase {
         
         for (inputString, expectedResult) in inputData {
             
-            // Computing
-            let result = StringValidators.Email.isValid(string: inputString)
-            
-            //  Assertion
-            XCTAssertEqual(result, expectedResult)
+            let activityName = "\(#function) with \(inputString) to get \(expectedResult)"
+            XCTContext.runActivity(named: activityName) { activity in
+                
+                // Computing
+                let result = StringValidators.Email.isValid(string: inputString)
+                
+                //  Assertion
+                XCTAssertEqual(result, expectedResult)
+                
+            }
         }
         
     }
@@ -60,13 +65,17 @@ final class StringValidatorsTests: XCTestCase {
         
         for (inputString, expectedResult) in inputData {
             
-            // Computing
-            let result = StringValidators.Password.isValid(string: inputString)
-            
-            //  Assertion
-            XCTAssertEqual(result, expectedResult)
+            let activityName = "\(#function) with \(inputString) to get \(expectedResult)"
+            XCTContext.runActivity(named: activityName) { activity in
+                
+                // Computing
+                let result = StringValidators.Password.isValid(string: inputString)
+                
+                //  Assertion
+                XCTAssertEqual(result, expectedResult)
+                
+            }
         }
-        
     }
     
     func testPasswordMissingValidators() throws {
@@ -84,14 +93,18 @@ final class StringValidatorsTests: XCTestCase {
         
         for (inputString, expectedResult) in inputData {
             
-            // Computing
-            let result = StringValidators.Password.getMissingValidation(string: inputString)
-            
-            //  Assertion
-            XCTAssertEqual(result.count, expectedResult.count)
-            XCTAssertEqual(result.sorted(), expectedResult.sorted())
+            let activityName = "\(#function) with \(inputString) to get \(expectedResult)"
+            XCTContext.runActivity(named: activityName) { activity in
+                
+                // Computing
+                let result = StringValidators.Password.getMissingValidation(string: inputString)
+                
+                //  Assertion
+                XCTAssertEqual(result.count, expectedResult.count)
+                XCTAssertEqual(result.sorted(), expectedResult.sorted())
+                
+            }
         }
-        
     }
     
     func testEmailMissingValidators() throws {
@@ -112,14 +125,18 @@ final class StringValidatorsTests: XCTestCase {
         
         for (inputString, expectedResult) in inputData {
             
-            // Computing
-            let result = StringValidators.Email.getMissingValidation(string: inputString)
-            
-            //  Assertion
-            XCTAssertEqual(result.count, expectedResult.count)
-            XCTAssertEqual(result.sorted(), expectedResult.sorted())
+            let activityName = "\(#function) with \(inputString) to get \(expectedResult)"
+            XCTContext.runActivity(named: activityName) { activity in
+                
+                // Computing
+                let result = StringValidators.Email.getMissingValidation(string: inputString)
+                
+                //  Assertion
+                XCTAssertEqual(result.count, expectedResult.count)
+                XCTAssertEqual(result.sorted(), expectedResult.sorted())
+                
+            }
         }
-        
     }
 
 }

@@ -26,10 +26,11 @@ struct TaskView: View {
                     ForEach(Array(vm.tasks.enumerated()), id: \.offset) { index, task in
                         HStack {
                             Text(task.name)
-                                .accessibilityLabel(task.id.uuidString)
+                                .accessibilityLabel(vm.accessibilityLabelFor(task: task))
                                 .fontWeight(.semibold)
                                 .strikethrough(task.completed)
                                 .opacity(task.completed ? 0.5 : 1)
+                            
                         }.onTapGesture {
                             vm.toggleTask(index: index)
                         }
@@ -41,29 +42,33 @@ struct TaskView: View {
                 .background(.white)
                 .accessibilityLabel("TaskList")
                 
-                ZStack {
-                    Circle()
-                        .fill(.blue)
-                        .frame(width: 75, height: 75)
-                        .shadow(color: .gray.opacity(0.5), radius: 10, x: 7, y: 7)
-                    Image(systemName: "plus")
-                        .foregroundColor(.white)
-                        .font(.system(size: 30, weight: .semibold))
-                }
-                .accessibilityLabel("CreateTaskButton")
-                .onTapGesture {
+                Button {
                     self.vm.showNewTaskAlert()
-                }
+                } label: {
+                    ZStack {
+                        Circle()
+                            .fill(.blue)
+                            .frame(width: 75, height: 75)
+                            .shadow(color: .gray.opacity(0.5), radius: 10, x: 7, y: 7)
+                        Image(systemName: "plus")
+                            .foregroundColor(.white)
+                            .font(.system(size: 30, weight: .semibold))
+                    }
+                    
+                }.accessibilityLabel("CreateTaskButton")
             }
             
         }
         .navigationTitle("Tasks")
         .alert("New Task", isPresented: $vm.newTaskAlertPresented, actions: {
+            
             TextField("Name", text: $vm.newTaskName)
-                .accessibilityLabel("CreateTaskAlertNameField")
+            .accessibilityLabel("CreateTaskAlertNameField")
+            
             Button("OK", role: .cancel, action: {
                 vm.createNewTask()
             }).accessibilityLabel("CreateTaskAlertConfirmButton")
+            
         }, message: {
             Text("Please enter the name for the new task")
                 .accessibilityLabel("CreateTaskAlertMessage")

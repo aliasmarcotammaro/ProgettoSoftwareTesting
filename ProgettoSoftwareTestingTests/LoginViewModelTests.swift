@@ -41,16 +41,20 @@ final class LoginViewModelTests: XCTestCase {
         
         for (inputStrings, expectedResult) in inputData {
             
-            // Computing
-            viewModel?.email = inputStrings.first!
-            viewModel?.password = inputStrings.last!
-            
-            let result = viewModel?.isSignInButtonDisabled
-            
-            //  Assertion
-            XCTAssertEqual(result, expectedResult)
+            let activityName = "\(#function) with \(inputStrings) to get \(expectedResult)"
+            XCTContext.runActivity(named: activityName) { activity in
+                
+                // Computing
+                viewModel?.email = inputStrings.first!
+                viewModel?.password = inputStrings.last!
+                
+                let result = viewModel?.isSignInButtonDisabled
+                
+                //  Assertion
+                XCTAssertEqual(result, expectedResult)
+                
+            }
         }
-        
     }
     
     func testCheckValidators() throws {
@@ -86,18 +90,22 @@ final class LoginViewModelTests: XCTestCase {
         
         for (inputStrings, expectedResult) in inputData {
             
-            // Computing
-            viewModel?.email = inputStrings.first!
-            viewModel?.password = inputStrings.last!
-            
-            let result = viewModel?.checkValidators()
-            
-            // Assertion
-            XCTAssertNotNil(result)
-            XCTAssertEqual(result!.count, expectedResult.count)
-            XCTAssertEqual(result!.sorted(), expectedResult.sorted())
+            let activityName = "\(#function) with \(inputStrings) to get \(expectedResult)"
+            XCTContext.runActivity(named: activityName) { activity in
+                
+                // Computing
+                viewModel?.email = inputStrings.first!
+                viewModel?.password = inputStrings.last!
+                
+                let result = viewModel?.checkValidators()
+                
+                // Assertion
+                XCTAssertNotNil(result)
+                XCTAssertEqual(result!.count, expectedResult.count)
+                XCTAssertEqual(result!.sorted(), expectedResult.sorted())
+                
+            }
         }
-        
     }
     
     

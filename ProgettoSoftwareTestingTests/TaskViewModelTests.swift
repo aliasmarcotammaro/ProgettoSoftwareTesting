@@ -251,7 +251,7 @@ final class TaskViewModelTests: XCTestCase {
         
         //  Assertion
         XCTAssertEqual(expectedResult, result)
-        XCTAssertEqual(expectedCount, viewModel?.tasks.count)
+        XCTAssertEqual(expectedCount, persistance.count)
     }
 
 }

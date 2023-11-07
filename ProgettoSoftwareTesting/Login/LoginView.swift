@@ -108,7 +108,7 @@ struct LoginView: View {
                 EmptyView().hidden()
             }
             .alert(vm.alertMessage ?? "", isPresented: $vm.showingAlert) {
-                Button("OK", role: .cancel) { }.accessibilityLabel("ErrorAlertCloseButton")
+                Button("OK", role: .cancel) { }.accessibilityLabel("AlertCloseButton")
             }
                 
         }

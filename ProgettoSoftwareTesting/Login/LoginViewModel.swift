@@ -10,8 +10,8 @@ import SwiftUI
 
 class LoginViewModel: ObservableObject {
     
-    @Published var email: String = "test@test.it"
-    @Published var password: String = "Test123!"
+    @Published var email: String = ""
+    @Published var password: String = ""
     @Published var showPassword: Bool = false
     @Published var missingValidators: [StringValidators.Validators] = []
     

@@ -11,8 +11,6 @@
 		A05196F62AF16BD20040E18C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05196F52AF16BD20040E18C /* LoginView.swift */; };
 		A05196F82AF16BD40040E18C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A05196F72AF16BD40040E18C /* Assets.xcassets */; };
 		A05196FB2AF16BD40040E18C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A05196FA2AF16BD40040E18C /* Preview Assets.xcassets */; };
-		A051970F2AF16BD40040E18C /* ProgettoSoftwareTestingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A051970E2AF16BD40040E18C /* ProgettoSoftwareTestingUITests.swift */; };
-		A05197112AF16BD40040E18C /* ProgettoSoftwareTestingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05197102AF16BD40040E18C /* ProgettoSoftwareTestingUITestsLaunchTests.swift */; };
 		A051971E2AF2614C0040E18C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A051971D2AF2614C0040E18C /* LoginViewModel.swift */; };
 		A05197262AF26DAF0040E18C /* main.yml in Resources */ = {isa = PBXBuildFile; fileRef = A05197252AF26DAF0040E18C /* main.yml */; };
 		A05197282AF271670040E18C /* StringValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05197272AF271670040E18C /* StringValidators.swift */; };
@@ -37,6 +35,8 @@
 		A051974E2AF2EEDC0040E18C /* ProgettoSoftwareTestingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05196F32AF16BD20040E18C /* ProgettoSoftwareTestingApp.swift */; };
 		A05197502AF557A60040E18C /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A051974F2AF557A60040E18C /* LoginViewModelTests.swift */; };
 		A05197762AF79CE80040E18C /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05197752AF79CE80040E18C /* TaskViewModelTests.swift */; };
+		A0E20EF52AFAA3870010A66D /* LoginViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E20EF42AFAA3870010A66D /* LoginViewUITests.swift */; };
+		A0E20EF72AFAACE00010A66D /* TaskViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E20EF62AFAACE00010A66D /* TaskViewUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,8 +64,6 @@
 		A05196FA2AF16BD40040E18C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A05197002AF16BD40040E18C /* ProgettoSoftwareTestingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProgettoSoftwareTestingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A051970A2AF16BD40040E18C /* ProgettoSoftwareTestingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProgettoSoftwareTestingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A051970E2AF16BD40040E18C /* ProgettoSoftwareTestingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgettoSoftwareTestingUITests.swift; sourceTree = "<group>"; };
-		A05197102AF16BD40040E18C /* ProgettoSoftwareTestingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgettoSoftwareTestingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A051971D2AF2614C0040E18C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A05197252AF26DAF0040E18C /* main.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = main.yml; sourceTree = "<group>"; };
 		A05197272AF271670040E18C /* StringValidators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringValidators.swift; sourceTree = "<group>"; };
@@ -76,6 +74,8 @@
 		A05197442AF2EDEB0040E18C /* StringValidatorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringValidatorsTests.swift; sourceTree = "<group>"; };
 		A051974F2AF557A60040E18C /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		A05197752AF79CE80040E18C /* TaskViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModelTests.swift; sourceTree = "<group>"; };
+		A0E20EF42AFAA3870010A66D /* LoginViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewUITests.swift; sourceTree = "<group>"; };
+		A0E20EF62AFAACE00010A66D /* TaskViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,8 +158,8 @@
 		A051970D2AF16BD40040E18C /* ProgettoSoftwareTestingUITests */ = {
 			isa = PBXGroup;
 			children = (
-				A051970E2AF16BD40040E18C /* ProgettoSoftwareTestingUITests.swift */,
-				A05197102AF16BD40040E18C /* ProgettoSoftwareTestingUITestsLaunchTests.swift */,
+				A0E20EF42AFAA3870010A66D /* LoginViewUITests.swift */,
+				A0E20EF62AFAACE00010A66D /* TaskViewUITests.swift */,
 			);
 			path = ProgettoSoftwareTestingUITests;
 			sourceTree = "<group>";
@@ -363,15 +363,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A05197112AF16BD40040E18C /* ProgettoSoftwareTestingUITestsLaunchTests.swift in Sources */,
 				A051974E2AF2EEDC0040E18C /* ProgettoSoftwareTestingApp.swift in Sources */,
 				A051973B2AF2A3930040E18C /* TaskView.swift in Sources */,
-				A051970F2AF16BD40040E18C /* ProgettoSoftwareTestingUITests.swift in Sources */,
 				A051973F2AF2ABAE0040E18C /* TaskViewModel.swift in Sources */,
 				A05197432AF2AC000040E18C /* TaskModel.swift in Sources */,
+				A0E20EF52AFAA3870010A66D /* LoginViewUITests.swift in Sources */,
 				A05197482AF2EECB0040E18C /* StringValidators.swift in Sources */,
 				A051974C2AF2EED30040E18C /* LoginView.swift in Sources */,
 				A051974A2AF2EECF0040E18C /* LoginViewModel.swift in Sources */,
+				A0E20EF72AFAACE00010A66D /* TaskViewUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
