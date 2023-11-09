@@ -11,17 +11,14 @@ import XCTest
 final class TaskViewModelTests: XCTestCase {
 
     var viewModel: TaskViewModel? = nil
-    var userDefaults: UserDefaults? = nil
     
     override func setUpWithError() throws {
         
-        guard let userDefaults = UserDefaults(suiteName: #file) else {
-            fatalError("Unable to create User Defaults")
-        }
+        let userDefaults = UserDefaults(suiteName: #file)
+        precondition(userDefaults != nil)
         
-        self.userDefaults = userDefaults
-        userDefaults.removePersistentDomain(forName: #file)
-        viewModel = TaskViewModel(userDefaults: userDefaults)
+        userDefaults!.removePersistentDomain(forName: #file)
+        viewModel = TaskViewModel(userDefaults: userDefaults!)
         
     }
     
@@ -32,7 +29,6 @@ final class TaskViewModelTests: XCTestCase {
     func testCreateNewTask() throws {
         // Precondition
         precondition(viewModel != nil)
-        precondition(userDefaults != nil)
         
         // Input
         let newTaskName = "Test"
@@ -53,7 +49,6 @@ final class TaskViewModelTests: XCTestCase {
     func testToggleTask() throws {
         // Precondition
         precondition(viewModel != nil)
-        precondition(userDefaults != nil)
         
         // Precondition: A task exist
         let newTaskName = "Test"
@@ -80,7 +75,6 @@ final class TaskViewModelTests: XCTestCase {
     func testToggleTaskInvalidIndex() throws {
         // Precondition
         precondition(viewModel != nil)
-        precondition(userDefaults != nil)
         
         // Precondition: A task exist
         let newTaskName = "Test"
@@ -105,7 +99,6 @@ final class TaskViewModelTests: XCTestCase {
     func testDeleteTask() throws {
         // Precondition
         precondition(viewModel != nil)
-        precondition(userDefaults != nil)
         
         // Precondition: A task exist
         let newTaskName = "Test"
@@ -129,7 +122,6 @@ final class TaskViewModelTests: XCTestCase {
     func testDeleteMultipleTask() throws {
         // Precondition
         precondition(viewModel != nil)
-        precondition(userDefaults != nil)
         
         // Precondition: Some tasks exist
         let newTaskNames = ["Test1", "Test2", "Test3", "Test4", "Test5"]
@@ -157,7 +149,6 @@ final class TaskViewModelTests: XCTestCase {
     func testDeleteAllTask() throws {
         // Precondition
         precondition(viewModel != nil)
-        precondition(userDefaults != nil)
         
         // Precondition: Some tasks exist
         let newTaskNames = ["Test1", "Test2", "Test3", "Test4", "Test5"]
@@ -178,7 +169,6 @@ final class TaskViewModelTests: XCTestCase {
     func testDeleteTaskInvalidIndex() throws {
         // Precondition
         precondition(viewModel != nil)
-        precondition(userDefaults != nil)
         
         // Precondition: A task exist
         let newTaskName = "Test"
@@ -202,7 +192,6 @@ final class TaskViewModelTests: XCTestCase {
     func testReadPersistanceOnCreate() throws {
         // Precondition
         precondition(viewModel != nil)
-        precondition(userDefaults != nil)
         
         // Input
         let newTaskName = "Test"
@@ -225,7 +214,6 @@ final class TaskViewModelTests: XCTestCase {
     func testReadPersistanceOnToggle() throws {
         // Precondition
         precondition(viewModel != nil)
-        precondition(userDefaults != nil)
         
         // Precondition: A task exist
         let newTaskName = "Test"
@@ -253,7 +241,6 @@ final class TaskViewModelTests: XCTestCase {
     func testReadPersistanceOnDelete() throws {
         // Precondition
         precondition(viewModel != nil)
-        precondition(userDefaults != nil)
         
         // Precondition: A task exist
         let newTaskName = "Test"

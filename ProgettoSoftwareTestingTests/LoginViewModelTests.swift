@@ -63,29 +63,39 @@ final class LoginViewModelTests: XCTestCase {
         precondition(viewModel != nil)
         
         // Input
+//        let inputData: [[String]:[StringValidators.Validators]] = [
+//            ["", ""]:                           [.invalidFormat, .pswLen8, .pswOneDigit, .pswOneLower, .pswOneUpper, .pswOneSymbol],
+//            ["", "abcdefghi"]:                  [.invalidFormat, .pswOneDigit, .pswOneUpper, .pswOneSymbol],
+//            ["", "Abc"]:                        [.invalidFormat, .pswLen8, .pswOneDigit, .pswOneSymbol],
+//            ["", "Abc123"]:                     [.invalidFormat, .pswLen8, .pswOneSymbol],
+//            ["", "Abcd1!"]:                     [.invalidFormat, .pswLen8],
+//            ["", "Abcd123!"]:                   [.invalidFormat, ],
+//            ["", "abcd123!"]:                   [.invalidFormat, .pswOneUpper],
+//            
+//            ["test@dom.abcdef", "Abc123"]:      [.invalidFormat, .pswLen8, .pswOneSymbol],
+//            ["test@", "abcdefghi"]:             [.invalidFormat, .pswOneDigit, .pswOneUpper, .pswOneSymbol],
+//            ["@", "Abc"]:                       [.invalidFormat, .pswLen8, .pswOneDigit, .pswOneSymbol],
+//            ["test@", "Abc123"]:                [.invalidFormat, .pswLen8, .pswOneSymbol],
+//            ["test@dom.it", "Abcd1!"]:          [.pswLen8],
+//            ["username_42@dom.it", "Abcd123!"]: [],
+//            ["test@", "abcd123!"]:              [.invalidFormat, .pswOneUpper],
+//            
+//            ["test@dom.abcdef", ""]:            [.invalidFormat, .pswLen8, .pswOneDigit, .pswOneLower, .pswOneUpper, .pswOneSymbol],
+//            ["test@", ""]:                      [.invalidFormat, .pswLen8, .pswOneDigit, .pswOneLower, .pswOneUpper, .pswOneSymbol],
+//            ["@", ""]:                          [.invalidFormat, .pswLen8, .pswOneDigit, .pswOneLower, .pswOneUpper, .pswOneSymbol],
+//            ["!#£@123.it", ""]:                 [.invalidFormat, .pswLen8, .pswOneDigit, .pswOneLower, .pswOneUpper, .pswOneSymbol],
+//            ["test@dom.it", ""]:                [.pswLen8, .pswOneDigit, .pswOneLower, .pswOneUpper, .pswOneSymbol],
+//            ["username_42@dom.it", ""]:         [.pswLen8, .pswOneDigit, .pswOneLower, .pswOneUpper, .pswOneSymbol],
+//        ]
+        
         let inputData: [[String]:[StringValidators.Validators]] = [
-            ["", ""]:                           [.invalidFormat, .pswLen8, .pswOneDigit, .pswOneLower, .pswOneUpper, .pswOneSymbol],
-            ["", "abcdefghi"]:                  [.invalidFormat, .pswOneDigit, .pswOneUpper, .pswOneSymbol],
-            ["", "Abc"]:                        [.invalidFormat, .pswLen8, .pswOneDigit, .pswOneSymbol],
-            ["", "Abc123"]:                     [.invalidFormat, .pswLen8, .pswOneSymbol],
-            ["", "Abcd1!"]:                     [.invalidFormat, .pswLen8],
-            ["", "Abcd123!"]:                   [.invalidFormat, ],
-            ["", "abcd123!"]:                   [.invalidFormat, .pswOneUpper],
-            
-            ["test@dom.abcdef", "Abc123"]:      [.invalidFormat, .pswLen8, .pswOneSymbol],
-            ["test@", "abcdefghi"]:             [.invalidFormat, .pswOneDigit, .pswOneUpper, .pswOneSymbol],
-            ["@", "Abc"]:                       [.invalidFormat, .pswLen8, .pswOneDigit, .pswOneSymbol],
-            ["test@", "Abc123"]:                [.invalidFormat, .pswLen8, .pswOneSymbol],
-            ["test@dom.it", "Abcd1!"]:          [.pswLen8],
-            ["username_42@dom.it", "Abcd123!"]: [],
-            ["test@", "abcd123!"]:              [.invalidFormat, .pswOneUpper],
-            
-            ["test@dom.abcdef", ""]:            [.invalidFormat, .pswLen8, .pswOneDigit, .pswOneLower, .pswOneUpper, .pswOneSymbol],
-            ["test@", ""]:                      [.invalidFormat, .pswLen8, .pswOneDigit, .pswOneLower, .pswOneUpper, .pswOneSymbol],
-            ["@", ""]:                          [.invalidFormat, .pswLen8, .pswOneDigit, .pswOneLower, .pswOneUpper, .pswOneSymbol],
-            ["!#£@123.it", ""]:                 [.invalidFormat, .pswLen8, .pswOneDigit, .pswOneLower, .pswOneUpper, .pswOneSymbol],
-            ["test@dom.it", ""]:                [.pswLen8, .pswOneDigit, .pswOneLower, .pswOneUpper, .pswOneSymbol],
-            ["username_42@dom.it", ""]:         [.pswLen8, .pswOneDigit, .pswOneLower, .pswOneUpper, .pswOneSymbol],
+            ["usernametest_42@dom.it", "Test123!"]:     [],
+            ["username", "Test123!"]:                   [.invalidFormat],
+            ["usernametest_42@dom.it", "123"]:          [.pswLen8, .pswOneSymbol, .pswOneLower, .pswOneUpper],
+            ["usernametest_42@dom.it", "Test"]:         [.pswLen8, .pswOneSymbol, .pswOneDigit],
+            ["usernametest_42@dom.it", "test"]:         [.pswLen8, .pswOneSymbol, .pswOneDigit, .pswOneUpper],
+            ["usernametest_42@dom.it", "TEST"]:         [.pswLen8, .pswOneSymbol, .pswOneLower, .pswOneDigit],
+            ["usernametest_42@dom.it", "!!!"]:          [.pswLen8, .pswOneDigit, .pswOneLower, .pswOneUpper],
         ]
         
         for (inputStrings, expectedResult) in inputData {

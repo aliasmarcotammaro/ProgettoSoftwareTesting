@@ -57,7 +57,7 @@ jobs:
       DERIVED_DATA_PATH: "DerivedData"
       UI_TEST_TARGET: "ProgettoSoftwareTestingUITests"
     runs-on: macos-latest
-    needs: build
+    needs: unit_test
     steps:
 #    - name: Select Xcode version
 #      run: sudo xcode-select -s '/Applications/Xcode_13.4.1.app'
@@ -78,7 +78,7 @@ jobs:
 
   results:
     name: Results Generation
-    runs-on: macOS-13
+    runs-on: macos-latest
     needs: [unit_test, ui_test]
     steps:
     - name: Download Unit Tests Logs
