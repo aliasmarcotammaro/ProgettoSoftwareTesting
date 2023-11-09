@@ -53,7 +53,8 @@ jobs:
       if: success() || failure()
     - name: Test Results
       uses: kishikawakatsumi/xcresulttool@v1
-      with: UnitTestResults.xcresult
+      with:
+        path: UnitTestResults.xcresult
       if: success() || failure()
 
   ui_test:
@@ -83,7 +84,8 @@ jobs:
       if: success() || failure()
     - name: Test Results
       uses: kishikawakatsumi/xcresulttool@v1
-      with: UITestResults.xcresult
+      with:
+        path: UITestResults.xcresult
       if: success() || failure()
       
 #  results:
