@@ -51,6 +51,10 @@ jobs:
         name: UnitTestResults
         path: UnitTestResults.xcresult
       if: success() || failure()
+    - name: Test Results
+      uses: kishikawakatsumi/xcresulttool@v1
+      with: UnitTestResults.xcresult
+      if: success() || failure()
 
   ui_test:
     name: UI Test
@@ -77,28 +81,32 @@ jobs:
         name: UITestResults
         path: UITestResults.xcresult
       if: success() || failure()
-
-  results:
-    name: Results Generation
-    runs-on: macos-latest
-    needs: [unit_test, ui_test]
-    steps:
-    - name: Download Unit Tests Logs
-      uses: actions/download-artifact@v1
-      with:
-        name: UnitTestResults
-        path: ./UnitTestResults.xcresult
-    - name: Download UI Tests Logs
-      uses: actions/download-artifact@v1
-      with:
-        name: UITestResults
-        path: ./UITestResults.xcresult
-    - uses: kishikawakatsumi/xcresulttool@v1
-      with:
-        path: |
-          ./UnitTestResults.xcresult
-          ./UITestResults.xcresult
+    - name: Test Results
+      uses: kishikawakatsumi/xcresulttool@v1
+      with: UITestResults.xcresult
       if: success() || failure()
+      
+#  results:
+#    name: Results Generation
+#    runs-on: macos-latest
+#    needs: [unit_test, ui_test]
+#    steps:
+#    - name: Download Unit Tests Logs
+#      uses: actions/download-artifact@v1
+#      with:
+#        name: UnitTestResults
+#        path: ./UnitTestResults.xcresult
+#    - name: Download UI Tests Logs
+#      uses: actions/download-artifact@v1
+#      with:
+#        name: UITestResults
+#        path: ./UITestResults.xcresult
+#    - uses: kishikawakatsumi/xcresulttool@v1
+#      with:
+#        path: |
+#          ./UnitTestResults.xcresult
+#          ./UITestResults.xcresult
+#      if: success() || failure()
 
 
 
