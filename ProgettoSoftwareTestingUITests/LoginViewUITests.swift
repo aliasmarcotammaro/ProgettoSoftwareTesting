@@ -64,6 +64,10 @@ final class LoginViewUITests: XCTestCase {
         
         XCTAssert(alert.exists)
         XCTAssert(alertDescription.exists)
+        
+        app.alerts.element.buttons["AlertCloseButton"].tap()
+        XCTAssert(emailTextField.exists)
+        XCTAssert(passwordTextField.exists)
     }
     
     
@@ -80,6 +84,10 @@ final class LoginViewUITests: XCTestCase {
         app.buttons["LoginButton"].tap()
         
         XCTAssert(app.alerts.element.exists)
+        app.alerts.element.buttons["AlertCloseButton"].tap()
+        
+        XCTAssert(emailTextField.exists)
+        XCTAssert(passwordTextField.exists)
     }
     
     func testLoginSuccess() throws {
