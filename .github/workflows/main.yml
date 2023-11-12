@@ -23,6 +23,7 @@ jobs:
         -scheme $SCHEME \
         -destination "generic/platform=iOS Simulator" \
         -derivedDataPath $DERIVED_DATA_PATH \
+        -enableCodeCoverage YES \
         build-for-testing \
         CODE_SIGNING_ALLOWED=NO
     - name: Upload products
