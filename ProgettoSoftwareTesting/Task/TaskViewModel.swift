@@ -24,11 +24,16 @@ class TaskViewModel: ObservableObject {
     
     // Tasks Methods
     
-    func createNewTask() {
+    @discardableResult
+    func createNewTask() -> Bool {
+        
+        guard self.newTaskName != "" else { return false }
+        
         let newTask = Task(name: self.newTaskName, completed: false)
         self.tasks.append(newTask)
         self.newTaskName = ""
         updatePersistance(tasks: self.tasks)
+        return true
     }
     
     @discardableResult
@@ -59,9 +64,11 @@ class TaskViewModel: ObservableObject {
         return true
     }
     
-    func deleteAllTask() {
+    @discardableResult
+    func deleteAllTask() -> Bool {
         self.tasks = []
         updatePersistance(tasks: self.tasks)
+        return true
     }
     
     // Persistance Methods

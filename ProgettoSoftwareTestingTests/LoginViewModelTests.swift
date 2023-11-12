@@ -45,10 +45,10 @@ final class LoginViewModelTests: XCTestCase {
             XCTContext.runActivity(named: activityName) { activity in
                 
                 // Computing
-                viewModel?.email = inputStrings.first!
-                viewModel?.password = inputStrings.last!
+                viewModel!.email = inputStrings.first!
+                viewModel!.password = inputStrings.last!
                 
-                let result = viewModel?.isSignInButtonDisabled
+                let result = viewModel!.isSignInButtonDisabled
                 
                 //  Assertion
                 XCTAssertEqual(result, expectedResult)
@@ -62,7 +62,7 @@ final class LoginViewModelTests: XCTestCase {
         // Precondition
         precondition(viewModel != nil)
         
-        // Input        
+        // Input
         let inputData: [[String]:[StringValidators.Validators]] = [
             ["usernametest_42@dom.it", "Test123!"]:     [],
             ["username", "Test123!"]:                   [.invalidFormat],
@@ -79,15 +79,15 @@ final class LoginViewModelTests: XCTestCase {
             XCTContext.runActivity(named: activityName) { activity in
                 
                 // Computing
-                viewModel?.email = inputStrings.first!
-                viewModel?.password = inputStrings.last!
+                viewModel!.email = inputStrings.first!
+                viewModel!.password = inputStrings.last!
                 
-                let result = viewModel?.checkValidators()
+                let result = viewModel!.checkValidators()
                 
                 // Assertion
                 XCTAssertNotNil(result)
-                XCTAssertEqual(result!.count, expectedResult.count)
-                XCTAssertEqual(result!.sorted(), expectedResult.sorted())
+                XCTAssertEqual(result.count, expectedResult.count)
+                XCTAssertEqual(result.sorted(), expectedResult.sorted())
                 
             }
         }
@@ -105,37 +105,41 @@ final class LoginViewModelTests: XCTestCase {
         precondition(StringValidators.Password.isValid(string: password))
         
         // Input
-        viewModel?.email = email
-        viewModel?.password = password
+        viewModel!.email = email
+        viewModel!.password = password
         
         // Computing
-        viewModel?.saveUser()
-        let registeredPassword = viewModel?.userDefaults.string(forKey: email)
-        let canLogin = viewModel?.canLogin
+        viewModel!.saveUser()
+        let registeredPassword = viewModel!.userDefaults.string(forKey: email)
         
         // Assertion
         XCTAssertEqual(password, registeredPassword)
-        XCTAssertEqual(canLogin, true)
+        
+        // Postcondition
+        XCTAssert(viewModel!.canLogin)
     }
     
     func testLogin() throws {
         
+        // Input
         let email = "prova@prova.it"
         let password = "Prova123!"
         
         // Precondition
         precondition(viewModel != nil)
         
-        // Input
-        viewModel?.email = email
-        viewModel?.password = password
+        // Precondition: User is registered
+        viewModel!.email = email
+        viewModel!.password = password
+        viewModel!.saveUser()
         
         // Computing
-        viewModel?.saveUser()
-        let canLogin = viewModel?.canLogin
+        viewModel!.email = email
+        viewModel!.password = password
+        let result = viewModel!.canLogin
         
         // Assertion
-        XCTAssertEqual(canLogin, true)
+        XCTAssert(result)
         
     }
     

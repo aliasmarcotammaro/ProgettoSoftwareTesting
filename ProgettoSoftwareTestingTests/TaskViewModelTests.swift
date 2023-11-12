@@ -34,16 +34,41 @@ final class TaskViewModelTests: XCTestCase {
         let newTaskName = "Test"
         
         // Computing
-        viewModel?.newTaskName = newTaskName
-        viewModel?.createNewTask()
-        
-        let expectedCount = 1
+        viewModel!.newTaskName = newTaskName
+        let result = viewModel!.createNewTask()
+        let persistance = viewModel!.readPersistance()
         
         //  Assertion
-        XCTAssertEqual(expectedCount, viewModel?.tasks.count)
+        XCTAssert(result)
+        
+        // Postcondition
+        XCTAssertEqual(1, viewModel!.tasks.count)
         XCTAssertTrue(viewModel!.tasks.contains(where: { task in
             task.name == newTaskName && !task.completed
         }))
+        
+        XCTAssertEqual(1, persistance.count)
+        XCTAssertTrue(persistance.contains(where: { task in
+            task.name == newTaskName && !task.completed
+        }))
+    }
+    
+    func testCreateNewTaskFailure() throws {
+        // Precondition
+        precondition(viewModel != nil)
+        
+        // Input
+        let newTaskName = ""
+        
+        // Computing
+        viewModel!.newTaskName = newTaskName
+        let result = viewModel!.createNewTask()
+        
+        //  Assertion
+        XCTAssertFalse(result)
+        
+        //  Postcondition
+        XCTAssert(viewModel!.tasks.isEmpty)
     }
     
     func testToggleTask() throws {
@@ -52,22 +77,27 @@ final class TaskViewModelTests: XCTestCase {
         
         // Precondition: A task exist
         let newTaskName = "Test"
-        viewModel?.newTaskName = newTaskName
-        viewModel?.createNewTask()
+        viewModel!.newTaskName = newTaskName
+        viewModel!.createNewTask()
         
         // Input
         let indexToToggle = 0
         
         // Computing
-        let result = viewModel?.toggleTask(index: indexToToggle)
-        
-        let expectedResult = true
-        let expectedCount = 1
+        let result = viewModel!.toggleTask(index: indexToToggle)
+        let persistance = viewModel!.readPersistance()
         
         //  Assertion
-        XCTAssertEqual(expectedResult, result)
-        XCTAssertEqual(expectedCount, viewModel?.tasks.count)
+        XCTAssert(result)
+        
+        //  Postcondition
+        XCTAssertEqual(1, viewModel!.tasks.count)
         XCTAssertTrue(viewModel!.tasks.contains(where: { task in
+            task.name == newTaskName && task.completed
+        }))
+        
+        XCTAssertEqual(1, persistance.count)
+        XCTAssertTrue(persistance.contains(where: { task in
             task.name == newTaskName && task.completed
         }))
     }
@@ -78,19 +108,19 @@ final class TaskViewModelTests: XCTestCase {
         
         // Precondition: A task exist
         let newTaskName = "Test"
-        viewModel?.newTaskName = newTaskName
-        viewModel?.createNewTask()
+        viewModel!.newTaskName = newTaskName
+        viewModel!.createNewTask()
         
         // Input
         let indexToToggle = -4
         
         // Computing
-        let result = viewModel?.toggleTask(index: indexToToggle)
-        
-        let expectedResult = false
+        let result = viewModel!.toggleTask(index: indexToToggle)
         
         //  Assertion
-        XCTAssertEqual(expectedResult, result)
+        XCTAssertFalse(result)
+        
+        //  Postcondition
         XCTAssertTrue(viewModel!.tasks.contains(where: { task in
             task.name == newTaskName && !task.completed
         }))
@@ -102,21 +132,22 @@ final class TaskViewModelTests: XCTestCase {
         
         // Precondition: A task exist
         let newTaskName = "Test"
-        viewModel?.newTaskName = newTaskName
-        viewModel?.createNewTask()
+        viewModel!.newTaskName = newTaskName
+        viewModel!.createNewTask()
         
         // Input
         let indexToRemove = 0
         
         // Computing
-        let result = viewModel?.deleteTask(indexSet: IndexSet(integer: indexToRemove))
-        
-        let expectedCount = 0
-        let expectedResult = true
+        let result = viewModel!.deleteTask(indexSet: IndexSet(integer: indexToRemove))
+        let persistance = viewModel!.readPersistance()
         
         //  Assertion
-        XCTAssertEqual(expectedResult, result)
-        XCTAssertEqual(expectedCount, viewModel?.tasks.count)
+        XCTAssert(result)
+        
+        //  Postcondition
+        XCTAssert(viewModel!.tasks.isEmpty)
+        XCTAssert(persistance.isEmpty)
     }
     
     func testDeleteMultipleTask() throws {
@@ -126,24 +157,26 @@ final class TaskViewModelTests: XCTestCase {
         // Precondition: Some tasks exist
         let newTaskNames = ["Test1", "Test2", "Test3", "Test4", "Test5"]
         for name in newTaskNames {
-            viewModel?.newTaskName = name
-            viewModel?.createNewTask()
+            viewModel!.newTaskName = name
+            viewModel!.createNewTask()
         }
         
         // Input
         let indexToRemove = IndexSet([0, 1, 3, 4])
         
         // Computing
-        let result = viewModel?.deleteTask(indexSet: indexToRemove)
-        
-        let expectedCount = 1
-        let expectedTaskName = newTaskNames[2]
-        let expectedResult = true
+        let result = viewModel!.deleteTask(indexSet: indexToRemove)
+        let persistance = viewModel!.readPersistance()
         
         //  Assertion
-        XCTAssertEqual(expectedResult, result)
-        XCTAssertEqual(expectedCount, viewModel?.tasks.count)
-        XCTAssertEqual(expectedTaskName, viewModel?.tasks.first?.name)
+        XCTAssert(result)
+        
+        //  Postcondition
+        XCTAssertEqual(1, viewModel!.tasks.count)
+        XCTAssertEqual(newTaskNames[2], viewModel!.tasks.first?.name)
+        
+        XCTAssertEqual(1, persistance.count)
+        XCTAssertEqual(newTaskNames[2], persistance.first?.name)
     }
     
     func testDeleteAllTask() throws {
@@ -153,17 +186,20 @@ final class TaskViewModelTests: XCTestCase {
         // Precondition: Some tasks exist
         let newTaskNames = ["Test1", "Test2", "Test3", "Test4", "Test5"]
         for name in newTaskNames {
-            viewModel?.newTaskName = name
-            viewModel?.createNewTask()
+            viewModel!.newTaskName = name
+            viewModel!.createNewTask()
         }
         
         // Computing
-        viewModel?.deleteAllTask()
-        
-        let expectedCount = 0
+        let result = viewModel!.deleteAllTask()
+        let persistance = viewModel!.readPersistance()
         
         //  Assertion
-        XCTAssertEqual(expectedCount, viewModel?.tasks.count)
+        XCTAssert(result)
+        
+        //  Postcondition
+        XCTAssert(viewModel!.tasks.isEmpty)
+        XCTAssert(persistance.isEmpty)
     }
     
     func testDeleteTaskInvalidIndex() throws {
@@ -172,94 +208,20 @@ final class TaskViewModelTests: XCTestCase {
         
         // Precondition: A task exist
         let newTaskName = "Test"
-        viewModel?.newTaskName = newTaskName
-        viewModel?.createNewTask()
+        viewModel!.newTaskName = newTaskName
+        viewModel!.createNewTask()
         
         // Input
         let indexToRemove = 1
         
         // Computing
-        let result = viewModel?.deleteTask(indexSet: IndexSet(integer: indexToRemove))
-
-        let expectedCount = 1
-        let expectedResult = false
+        let result = viewModel!.deleteTask(indexSet: IndexSet(integer: indexToRemove))
         
         //  Assertion
-        XCTAssertEqual(expectedResult, result)
-        XCTAssertEqual(expectedCount, viewModel?.tasks.count)
+        XCTAssertFalse(result)
+        
+        //  Postcondition
+        XCTAssertEqual(1, viewModel!.tasks.count)
     }
     
-    func testReadPersistanceOnCreate() throws {
-        // Precondition
-        precondition(viewModel != nil)
-        
-        // Input
-        let newTaskName = "Test"
-        
-        // Computing
-        viewModel?.newTaskName = newTaskName
-        viewModel?.createNewTask()
-        
-        let persistance = viewModel!.readPersistance()
-
-        let expectedCount = 1
-        
-        //  Assertion
-        XCTAssertEqual(expectedCount, persistance.count)
-        XCTAssertTrue(persistance.contains(where: { task in
-            task.name == newTaskName && !task.completed
-        }))
-    }
-    
-    func testReadPersistanceOnToggle() throws {
-        // Precondition
-        precondition(viewModel != nil)
-        
-        // Precondition: A task exist
-        let newTaskName = "Test"
-        viewModel?.newTaskName = newTaskName
-        viewModel?.createNewTask()
-        
-        // Input
-        let indexToToggle = 0
-        
-        // Computing
-        let result = viewModel?.toggleTask(index: indexToToggle)
-        let persistance = viewModel!.readPersistance()
-        
-        let expectedResult = true
-        let expectedCount = 1
-        
-        //  Assertion
-        XCTAssertEqual(expectedResult, result)
-        XCTAssertEqual(expectedCount, viewModel?.tasks.count)
-        XCTAssertTrue(persistance.contains(where: { task in
-            task.name == newTaskName && task.completed
-        }))
-    }
-    
-    func testReadPersistanceOnDelete() throws {
-        // Precondition
-        precondition(viewModel != nil)
-        
-        // Precondition: A task exist
-        let newTaskName = "Test"
-        viewModel?.newTaskName = newTaskName
-        viewModel?.createNewTask()
-        
-        // Input
-        let indexToDelete = 0
-        
-        // Computing
-        let result = viewModel?.deleteTask(indexSet: IndexSet(integer: indexToDelete))
-        let persistance = viewModel!.readPersistance()
-        
-        let expectedResult = true
-        let expectedCount = 0
-        
-        //  Assertion
-        XCTAssertEqual(expectedResult, result)
-        XCTAssertEqual(expectedCount, persistance.count)
-    }
-
 }
